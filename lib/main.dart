@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_interview/view/homePageView.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const Homepageview(),
     );
   }
 }
