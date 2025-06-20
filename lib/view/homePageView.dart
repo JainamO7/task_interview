@@ -167,6 +167,7 @@ class HomePageView extends StatelessWidget {
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.max,
                 children: [
                   _buildOptionCard(
                     title: "Find My Platter",
@@ -191,6 +192,24 @@ class HomePageView extends StatelessWidget {
         name: 'Birthday platter',
         detils: '#102026 • 40 guests',
         minites: '20 mins',
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        color: Colors.red, // Match app bar color for consistency
+        child: SizedBox(
+          width: double.maxFinite,
+          child: InkWell(
+            child: Text(
+              "Next",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.lexend(
+                color: AppColors.whiteColor,
+                fontSize: 25,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -234,7 +253,7 @@ class HomePageView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: 100,
+        height: 50,
         margin: EdgeInsets.all(8),
         // Slightly taller to accommodate extra details
         decoration: BoxDecoration(
