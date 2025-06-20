@@ -729,6 +729,12 @@ void showTastingSessionBottomSheet(BuildContext context) {
                 ChoiceChip(
                   label: Text("Non Veg items"),
                   selected: false,
+                  avatar: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      border: Border.all(color: Colors.red),
+                    ),
+                  ),
                   backgroundColor: Colors.grey[200],
                   selectedColor: Colors.red[100],
                 ),
