@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:task_interview/Controller/viewHomeController.dart';
 import 'package:task_interview/utils/AppColors.dart';
 import 'package:task_interview/utils/AppImage.dart';
+import 'package:task_interview/view/finalPageVIew.dart';
 
 class HomePageView extends StatelessWidget {
   HomePageView({super.key});
@@ -200,6 +201,9 @@ class HomePageView extends StatelessWidget {
         child: SizedBox(
           width: double.maxFinite,
           child: InkWell(
+            onTap: () {
+              Get.to(() => Finalpageview());
+            },
             child: Text(
               "Next",
               textAlign: TextAlign.center,
