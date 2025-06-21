@@ -33,7 +33,12 @@ class Finalpageview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios_new_rounded),
+        leading: GestureDetector(
+          onTap: () {
+            Get.back();
+          },
+          child: Icon(Icons.arrow_back_ios_new_rounded),
+        ),
         title: Text(
           "Suggested Platters",
           textAlign: TextAlign.start,
