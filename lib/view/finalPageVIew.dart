@@ -6,7 +6,6 @@ import 'package:task_interview/utils/AppImage.dart';
 
 class Finalpageview extends StatelessWidget {
   Finalpageview({super.key});
-
   List<Map<String, String>> details = [
     {
       'title': "Birthday party",
@@ -685,6 +684,9 @@ class Finalpageview extends StatelessWidget {
 }
 
 void showTastingSessionBottomSheet(BuildContext context) {
+  RxBool isVegSelected = true.obs;
+  RxString selectedTimeSlot = ''.obs; // 'noon' or 'evening'
+
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -704,43 +706,112 @@ void showTastingSessionBottomSheet(BuildContext context) {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
-            // Toggle Buttons
+
+            // Veg/Non-Veg Toggle
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ChoiceChip(
-                  label: Text("Veg items"),
-                  selected: false,
-                  avatar: Container(
+                Obx(() {
+                  return Container(
+                    width: 250,
+                    height: 50,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(2),
-                      border: Border.all(color: Colors.green),
+                      color: Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                    padding: EdgeInsets.all(1),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.green,
-                      radius: 5,
+                    child: Stack(
+                      children: [
+                        AnimatedAlign(
+                          duration: Duration(milliseconds: 250),
+                          curve: Curves.easeInOut,
+                          alignment:
+                              isVegSelected.value
+                                  ? Alignment.centerLeft
+                                  : Alignment.centerRight,
+                          child: Container(
+                            width: 125,
+                            margin: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () => isVegSelected.value = true,
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.stop_circle_outlined,
+                                        color:
+                                            isVegSelected.value
+                                                ? Colors.green
+                                                : Colors.grey,
+                                        size: 18,
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Text(
+                                        "Veg items",
+                                        style: TextStyle(
+                                          color:
+                                              isVegSelected.value
+                                                  ? Colors.black
+                                                  : Colors.grey,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () => isVegSelected.value = false,
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.change_history,
+                                        color:
+                                            !isVegSelected.value
+                                                ? Colors.red
+                                                : Colors.grey,
+                                        size: 18,
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Text(
+                                        "Non Veg items",
+                                        style: TextStyle(
+                                          color:
+                                              !isVegSelected.value
+                                                  ? Colors.black
+                                                  : Colors.grey,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ),
-                  backgroundColor: Colors.grey[200],
-                  selectedColor: Colors.green[100],
-                ),
-                const SizedBox(width: 10),
-                ChoiceChip(
-                  label: Text("Non Veg items"),
-                  selected: false,
-                  avatar: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(2),
-                      border: Border.all(color: Colors.red),
-                    ),
-                  ),
-                  backgroundColor: Colors.grey[200],
-                  selectedColor: Colors.red[100],
-                ),
+                  );
+                }),
               ],
             ),
+
             const SizedBox(height: 20),
+
             // Date Selector
             SizedBox(
               height: 60,
@@ -779,28 +850,40 @@ void showTastingSessionBottomSheet(BuildContext context) {
                 },
               ),
             ),
+
             const SizedBox(height: 20),
-            // Time Slots
-            Column(
-              children: [
-                _timeSlotTile(
-                  icon: Icons.wb_sunny_outlined,
-                  timeRange: "Afternoon",
-                  time: "12-02PM",
-                  slotInfo: "4 slots left",
-                  isSelected: true,
-                ),
-                const SizedBox(height: 10),
-                _timeSlotTile(
-                  icon: Icons.nightlight_round,
-                  timeRange: "Evening",
-                  time: "07-10PM",
-                  slotInfo: "4 slots left",
-                  isSelected: false,
-                ),
-              ],
+
+            // Time Slot Selector
+            Obx(
+              () => Column(
+                children: [
+                  GestureDetector(
+                    onTap: () => selectedTimeSlot.value = 'noon',
+                    child: _timeSlotTile(
+                      icon: Icons.wb_sunny_outlined,
+                      timeRange: "Afternoon",
+                      time: "12-02PM",
+                      slotInfo: "4 slots left",
+                      isSelected: selectedTimeSlot.value == 'noon',
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  GestureDetector(
+                    onTap: () => selectedTimeSlot.value = 'evening',
+                    child: _timeSlotTile(
+                      icon: Icons.nightlight_round,
+                      timeRange: "Evening",
+                      time: "07-10PM",
+                      slotInfo: "4 slots left",
+                      isSelected: selectedTimeSlot.value == 'evening',
+                    ),
+                  ),
+                ],
+              ),
             ),
+
             const SizedBox(height: 20),
+
             // Price Summary
             Container(
               padding: const EdgeInsets.all(16),
@@ -818,27 +901,38 @@ void showTastingSessionBottomSheet(BuildContext context) {
                 ],
               ),
             ),
+
             const SizedBox(height: 20),
+
             // Next Button
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+            Obx(() {
+              bool isNextEnabled = selectedTimeSlot.value.isNotEmpty;
+              return SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        isNextEnabled ? Colors.purple : Colors.grey,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  onPressed:
+                      isNextEnabled
+                          ? () {
+                            print("Next button pressed");
+                            print("Selected slot: ${selectedTimeSlot.value}");
+                          }
+                          : null,
+                  child: const Text(
+                    "Next",
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
                 ),
-                onPressed: () {
-                  // Remove recursive call and add desired action
-                  print("Next button pressed"); // Placeholder action
-                  // Optionally navigate to another screen or close the sheet
-                  // Navigator.pop(context); // Uncomment to close the sheet
-                },
-                child: const Text("Next", style: TextStyle(fontSize: 16)),
-              ),
-            ),
+              );
+            }),
+
             const SizedBox(height: 20),
           ],
         ),
@@ -866,7 +960,8 @@ Widget _timeSlotTile({
     child: ListTile(
       leading: Icon(icon, color: Colors.purple),
       title: Text("$timeRange\n$time"),
-      subtitle: Row(
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Icon(Icons.circle, size: 8, color: Colors.green),
           const SizedBox(width: 4),
