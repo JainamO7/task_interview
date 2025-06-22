@@ -16,4 +16,5 @@ class Appimage {
   static const expertImage = "assets/exImage.png";
   static const sharedImage = "assets/shareImage.png";
   static const vagIcon = "assets/Icon comp.png";
+  static const cutomerPhoto = "assets/customerphoto.png";
 }

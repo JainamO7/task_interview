@@ -302,7 +302,7 @@ class Finalpageview extends StatelessWidget {
                 itemCount: 5,
                 itemBuilder: (context, index) {
                   return _custoreReview(
-                    imageUrl: Appimage.birthdayImage,
+                    imageUrl: Appimage.cutomerPhoto,
                     name: "Abhinav C",
                     subTitle: 'Delivery Box',
                     rating: '5',
@@ -473,75 +473,84 @@ class Finalpageview extends StatelessWidget {
       margin: EdgeInsets.all(8),
       child: SizedBox(
         width: Get.width,
-        height: Get.height / 3.5,
+        height: Get.height / 5,
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(0.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Exclusive consultation",
-                          style: GoogleFonts.lexend(
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.whiteColor,
-                            fontSize: 15,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          "Share the menu link with your fam or friends & decide",
-                          style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w300,
-                            color: AppColors.whiteColor,
-                            fontSize: 12,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.boxMinitColor,
-                            foregroundColor: AppColors.minitFontColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Get the gang’s opinion!",
+                            style: GoogleFonts.lexend(
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.whiteColor,
+                              fontSize: 15,
                             ),
                           ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Icon(Icons.share, color: AppColors.primaryColor),
-                              const SizedBox(width: 3),
-                              Text(
-                                "Share",
-                                style: GoogleFonts.lexend(
-                                  color: AppColors.backgroundColor,
-                                  fontSize: 14,
-                                ),
+                          const SizedBox(height: 8),
+                          Text(
+                            "Share the menu link with your fam or friends & decide",
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w300,
+                              color: AppColors.whiteColor,
+                              fontSize: 12,
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.boxMinitColor,
+                              foregroundColor: AppColors.minitFontColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                            ],
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Icon(
+                                  Icons.share,
+                                  color: AppColors.primaryColor,
+                                ),
+                                const SizedBox(width: 3),
+                                Text(
+                                  "Share",
+                                  style: GoogleFonts.lexend(
+                                    color: AppColors.backgroundColor,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                  Image.asset(
-                    Appimage.expertImage,
-                    height: Get.height / 4,
-                    width: 120,
-                    fit: BoxFit.cover,
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Image.asset(
+                      Appimage.sharedImage,
+                      // height: Get.height / 5,
+                      width: Get.width / 3,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ],
               ),
